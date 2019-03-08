@@ -65,8 +65,8 @@ public class Collider
     {
         var dx = b1.X - b2.X;
         var dy = b1.Y - b2.Y;
-        var dvx = b1.XVelocity - b2.XVelocity;
-        var dvy = b1.YVelocity - b2.YVelocity;
+        var dvx = b1.VelocityX - b2.VelocityX;
+        var dvy = b1.VelocityY - b2.VelocityY;
 
         var sumOfSquareVelocities = dvx * dvx + dvy * dvy;
         var sumOfSquareDistances = dx * dx + dy * dy;
