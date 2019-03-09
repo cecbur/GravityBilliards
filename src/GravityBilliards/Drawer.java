@@ -1,3 +1,5 @@
+package GravityBilliards;
+
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
@@ -29,7 +31,9 @@ public class Drawer
             int y = (int)((ball.Y-ball.Diameter/2) * pixelsPerMeter);
             ig2.drawOval(x, y, ballDiameter, ballDiameter);
         }
-        ImageIO.write(bi, "PNG", new File("c:\\slask\\GravityBilliards.png"));
+        // String file ="c:\\slask\\GravityBilliards.png";     // Magnus' work computer
+        String file ="d:\\CB\\cbtempd\\GravityBilliards.png";     // Cecilia work computer
+        ImageIO.write(bi, "PNG", new File(file));
 
     }
 }
