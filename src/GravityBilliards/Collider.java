@@ -1,3 +1,5 @@
+package GravityBilliards;
+
 import java.util.*;
 
 
@@ -82,4 +84,41 @@ public class Collider
 
         return -p/2 - D;
     }
+
+    static void BallCollision(Ball ball1 , Ball ball2)
+    {
+        // Verify that distance between balls is one ball diameter
+        if (Measurer.distance2D(ball1.X, ball1.Y, ball2.X, ball2.Y)!=Ball.Diameter) {
+            throw new IllegalArgumentException("Balls don't touch!");
+        }
+
+        // change frame of reference so that ball 1 is standing still
+        Ball b1pre = new Ball(ball1.X, ball1.Y, ball2.VelocityX-ball1.VelocityX, ball2.VelocityY-ball1.VelocityY);
+        Ball b2pre = new Ball(ball2.X, ball2.Y, 0, 0);
+
+        // Calculate angle of appoach for ball 1
+        double approachAngle = Math.atan(b1pre.VelocityX/b1pre.VelocityY);
+        // Calculate angle between balls
+        double ballAngle = Math.atan((b2pre.Y-b1pre.Y)/(b2pre.X-b1pre.X));
+
+        // Calculate speed after collision
+        double b1SpeedPre=Math.sqrt(b1pre.VelocityX*b1pre.VelocityX+b1pre.VelocityX*b1pre.VelocityX);
+        Ball b1post = new Ball(b1pre.X, b1pre.Y, b1SpeedPre*Math.sin(ballAngle-approachAngle)*Math.sin(approachAngle), -b1SpeedPre*Math.sin(ballAngle-approachAngle)*Math.cos(approachAngle));
+        Ball b2post = new Ball(b1pre.X, b1pre.Y, b1SpeedPre*Math.cos(ballAngle-approachAngle)*Math.cos(approachAngle), b1SpeedPre*Math.cos(ballAngle-approachAngle)*Math.sin(approachAngle));
+
+        // Calculate delta V
+        double b1dvx = b1post.VelocityX-b1pre.VelocityX;
+        double b1dvy = b1post.VelocityY-b1pre.VelocityY;
+        double b2dvx = b2post.VelocityX-b2pre.VelocityX;
+        double b2dvy = b2post.VelocityY-b1pre.VelocityY;
+
+        // Uppdate original balls
+        ball1.VelocityX += b1dvx;
+        ball1.VelocityY += b1dvy;
+        ball2.VelocityX += b2dvx;
+        ball2.VelocityY += b2dvy;
+
+    }
+
+
 }
