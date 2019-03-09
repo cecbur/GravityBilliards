@@ -24,7 +24,7 @@ public class Drawer
         // into integer pixels
         BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D ig2 = bi.createGraphics();
-        ig2.setColor(Color.cyan);
+        ig2.setColor(Color.red);
 
         for (Ball ball :state.Balls) {
             int x = (int)((ball.X-ball.Diameter/2) * pixelsPerMeter);
