@@ -2,7 +2,6 @@ package GravityBilliards;
 
 class Time {
 
-    // public static double ToCollision(Ball ball1, Ball ball2){ return Collider.GetTimeUntilCollision(ball1, ball2); }     // TODO: Remove
     public static double ToCollision(Ball ball1, Ball ball2){
         double dX0=ball2.X-ball1.X;
         double dY0=ball2.Y-ball1.Y;

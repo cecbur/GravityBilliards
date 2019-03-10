@@ -14,13 +14,12 @@ public class Drawer
 
     private static Integer animationFrame =0;
     private static int framesPerSecond =7;
-    // private static final String file ="c:\\slask\\GravityBilliards%s.png";     // Magnus' work computer
-    private static final String file ="d:\\CB\\cbtempd\\GravityBilliards%s.png";     // Cecilia work computer
+    private static final String file ="c:\\slask\\GravityBilliards%s.png";     // Magnus' work computer
+    // private static final String file ="d:\\CB\\cbtempd\\GravityBilliards%s.png";     // Cecilia computer
     private static int imageHeight = 600;
     private static double tableLengthPartOfImageHeight = 0.9;
     private static int tableLength =(int)(tableLengthPartOfImageHeight*imageHeight);
     private static int tableWidth = (int)(Table.Width * (double)tableLength/Table.Length);
-    // private int imageWidth = (int)((double)tableWidth/tableLengthPartOfImageHeight);     // TODO: Remove
     private static int imageWidth = tableWidth+(imageHeight-tableLength);
     private static double pixelsPerMeter=tableLength/Table.Length;
     private static int ballDiameter = (int)(Ball.Diameter*pixelsPerMeter);
@@ -59,12 +58,6 @@ public class Drawer
             DrawTable(ig2);
             for (Ball ball :balls) {
                 DrawBall(ig2, ball, t);
-                /* TODO: Remove
-                ig2.setColor(ball.Color);
-                int x = (int)((ball.xByTime(t)-ball.Diameter/2) * pixelsPerMeter+origoX);
-                int y = (int)((ball.yByTime(t)-ball.Diameter/2) * pixelsPerMeter+origoY);
-                ig2.drawOval(x, y, ballDiameter, ballDiameter);
-                */
             }
             ig2.drawString(t.toString(),0,0);
             ImageIO.write(bi, "PNG", new File(String.format(file, animationFrame.toString())));

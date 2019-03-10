@@ -80,12 +80,6 @@ public class Collider
         var q = (sumOfSquareDistances - Ball.Diameter*Ball.Diameter) / sumOfSquareVelocities;
         var D = Math.pow(p/2 , 2) - q;
 
-        /* TODO: Remove
-        if (D < 0)
-        {
-            return null;
-        }
-        */
         return -p/2 - D;
     }
 
@@ -93,12 +87,9 @@ public class Collider
     static void Collide(Ball ball1 , Ball ball2)
     {
         // Verify that distance between balls is one ball diameter
-        // if (Math.round(Measurer.distance2D(ball1.X, ball1.Y, ball2.X, ball2.Y)*10000)/10000!=Math.round(Ball.Diameter*10000)/10000) {    // TODO: Remove
-        if (!Measurer.sameDistance(ball1, ball2, Ball.Diameter)) {   // TODO: Keep
+        if (!Measurer.sameDistance(ball1, ball2, Ball.Diameter)) {
                 throw new IllegalArgumentException("Balls don't touch!");
         }
-        /* TODO: kEEP
-        */
 
         // change frame of reference so that ball 1 is standing still
         Ball b1pre = new Ball(ball1.X, ball1.Y, ball1.VelocityX-ball2.VelocityX, ball1.VelocityY-ball2.VelocityY, Color.black);
@@ -140,8 +131,6 @@ public class Collider
         if (wall.X!=null) ball.VelocityX=-ball.VelocityX;
         if (wall.Y!=null) ball.VelocityY=-ball.VelocityY;
     }
-        /* TODO: Keep
-            */
 
 
 
