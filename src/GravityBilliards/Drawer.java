@@ -12,10 +12,10 @@ import javax.imageio.ImageIO;
 public class Drawer
 {
 
-    private static Integer animationFrame =0;
+    public static Integer animationFrame =0;
     private static int framesPerSecond =7;
-    private static final String file ="c:\\slask\\GravityBilliards%s.png";     // Magnus' work computer
-    // private static final String file ="d:\\CB\\cbtempd\\GravityBilliards%s.png";     // Cecilia computer
+    // private static final String file ="c:\\slask\\GravityBilliards%s.png";     // Magnus' work computer
+    private static final String file ="d:\\CB\\cbtempd\\GravityBilliards%s.png";     // Cecilia computer
     private static int imageHeight = 600;
     private static double tableLengthPartOfImageHeight = 0.9;
     private static int tableLength =(int)(tableLengthPartOfImageHeight*imageHeight);

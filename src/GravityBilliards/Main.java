@@ -17,10 +17,17 @@ public class Main {
 
         State state = new State(balls);
         Drawer.Draw(state);
-        double timeToCollision = Time.ToCollision(balls.get(1), balls.get(2));
-        Drawer.Animate(balls, timeToCollision);
-        state.forwardTime(timeToCollision);
-        Collider.Collide(balls.get(1), balls.get(2));
+        double timeToCollision;
+        while (Drawer.animationFrame<16) {
+
+            var nextCollision=Collider.GetFirst(state.Balls);
+            timeToCollision = nextCollision.T;
+            Drawer.Animate(balls, timeToCollision);
+            state.forwardTime(timeToCollision);
+            if (nextCollision.B2!=null) Collider.Collide(nextCollision.B1, nextCollision.B2);
+            else Collider.Collide(nextCollision.B1, nextCollision.W);
+        }
+        /* TODO: Remove
         timeToCollision = Time.ToCollision(balls.get(2), Table.walls.get(Table.WallNames.XMAX));
         Drawer.Animate(balls, timeToCollision);
         state.forwardTime(timeToCollision);
@@ -30,5 +37,6 @@ public class Main {
         state.forwardTime(timeToCollision);
         Collider.Collide(balls.get(2), Table.walls.get(Table.WallNames.XMIN));
         Drawer.Animate(balls, 1);
+        */
     }
 }

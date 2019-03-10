@@ -45,6 +45,45 @@ public class Collider
         return first;
     }
 
+    public static GetFirstReturnObj GetFirst(List<Ball> balls)
+    {
+        GetFirstReturnObj returnObj = new GetFirstReturnObj();
+        for (Ball b1 : balls)
+        {
+            for (Ball b2 : balls) {
+                if (b1 == b2) {
+                    continue;
+                }
+                var t = Time.ToCollision(b1, b2);
+                if (t>0 && (returnObj.B1==null || returnObj.T>t))
+                {
+                    returnObj.T=t;
+                    returnObj.B1=b1;
+                    returnObj.B2=b2;
+                    returnObj.W=null;
+                }
+            }
+            for (Wall w : Table.walls.values()) {
+                var t = Time.ToCollision(b1, w);
+                if (t>0 && (returnObj.B1==null || returnObj.T>t))
+                {
+                    returnObj.T=t;
+                    returnObj.B1=b1;
+                    returnObj.B2=null;
+                    returnObj.W=w;
+                }
+            }
+        }
+        return returnObj;
+    }
+    public static class GetFirstReturnObj
+    {
+        public double T=-1;
+        public Ball B1=null;
+        public Ball B2=null;
+        public Wall W=null;
+    }
+
     private static List<Collision> GetAllCollision(List<Ball> balls)
     {
         var collistions = new ArrayList<Collision>();
@@ -63,24 +102,6 @@ public class Collider
             }
         }
         return collistions;
-    }
-
-    // TODO: Remove: Moved to Time
-    public static double GetTimeUntilCollision(Ball b1 , Ball b2)
-    {
-        var dx = b1.X - b2.X;
-        var dy = b1.Y - b2.Y;
-        var dvx = b1.VelocityX - b2.VelocityX;
-        var dvy = b1.VelocityY - b2.VelocityY;
-
-        var sumOfSquareVelocities = dvx * dvx + dvy * dvy;
-        var sumOfSquareDistances = dx * dx + dy * dy;
-
-        var p = 2 * (dx * dvx + dy * dvy) / sumOfSquareVelocities;
-        var q = (sumOfSquareDistances - Ball.Diameter*Ball.Diameter) / sumOfSquareVelocities;
-        var D = Math.pow(p/2 , 2) - q;
-
-        return -p/2 - D;
     }
 
     // Updates the velocities of the two balls to velocities after collision
