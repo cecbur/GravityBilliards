@@ -129,7 +129,6 @@ public class Collider
         ball2.VelocityY += b2dvy;
     }
 
-        /* TODO: Keep
     // Updates the velocities of the ball to velocity after collision
     static void Collide(Ball ball , Wall wall)
     {
@@ -138,9 +137,10 @@ public class Collider
             throw new IllegalArgumentException("Ball don't touch wall!");
         }
 
-        if (wall.X!=null) ball.X=-ball.X;
-        if (wall.Y!=null) ball.Y=-ball.Y;
+        if (wall.X!=null) ball.VelocityX=-ball.VelocityX;
+        if (wall.Y!=null) ball.VelocityY=-ball.VelocityY;
     }
+        /* TODO: Keep
             */
 
 

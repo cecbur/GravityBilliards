@@ -24,13 +24,13 @@ public class Main {
         timeToCollision = Time.ToCollision(balls.get(1), Table.walls.get(Table.WallNames.XMAX));
         Drawer.Animate(balls, timeToCollision);
         state.forwardTime(timeToCollision);
-        /* TODO
         Collider.Collide(balls.get(1), Table.walls.get(Table.WallNames.XMAX));
         timeToCollision = Time.ToCollision(balls.get(2), Table.walls.get(Table.WallNames.XMAX));
         Drawer.Animate(balls, timeToCollision);
         state.forwardTime(timeToCollision);
         Collider.Collide(balls.get(2), Table.walls.get(Table.WallNames.XMAX));
         Drawer.Animate(balls, 1);
+        /* TODO
         */
     }
 }
