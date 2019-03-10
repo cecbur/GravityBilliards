@@ -89,13 +89,16 @@ public class Collider
         return -p/2 - D;
     }
 
-    // Updates the velosities of the two balls to velosities after collision
+    // Updates the velocities of the two balls to velocities after collision
     static void Collide(Ball ball1 , Ball ball2)
     {
+        /* TODO: kEEP
         // Verify that distance between balls is one ball diameter
+        // if (!Measurer.sameDistance(ball1, ball2, Ball.Diameter)) {   // TODO: Keep
         if (Math.round(Measurer.distance2D(ball1.X, ball1.Y, ball2.X, ball2.Y)*10000)/10000!=Math.round(Ball.Diameter*10000)/10000) {
-            throw new IllegalArgumentException("Balls don't touch!");
+                throw new IllegalArgumentException("Balls don't touch!");
         }
+        */
 
         // change frame of reference so that ball 1 is standing still
         Ball b1pre = new Ball(ball1.X, ball1.Y, ball1.VelocityX-ball2.VelocityX, ball1.VelocityY-ball2.VelocityY, Color.black);
@@ -124,8 +127,22 @@ public class Collider
         ball1.VelocityY += b1dvy;
         ball2.VelocityX += b2dvx;
         ball2.VelocityY += b2dvy;
-
     }
+
+        /* TODO: Keep
+    // Updates the velocities of the ball to velocity after collision
+    static void Collide(Ball ball , Wall wall)
+    {
+        // Verify that distance between ball and wall is one half ball diameter
+        if (!Measurer.sameDistance(ball, wall, Ball.Diameter/2)) {
+            throw new IllegalArgumentException("Ball don't touch wall!");
+        }
+
+        if (wall.X!=null) ball.X=-ball.X;
+        if (wall.Y!=null) ball.Y=-ball.Y;
+    }
+            */
+
 
 
 }
