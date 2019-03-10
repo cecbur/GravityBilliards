@@ -2,7 +2,12 @@ package GravityBilliards;
 
 class Time {
 
-    public static Double ToWallCollision(Ball ball, Wall wall) {
+    // TODO: Move method here
+    public static Double ToCollision(Ball ball1, Ball ball2){
+        return Collider.GetTimeUntilCollision(ball1, ball2);
+    }
+
+    public static Double ToCollision(Ball ball, Wall wall) {
         double wallLessThanBall=0;
         if (wall.X!=null){ if (wall.X<ball.X) { wallLessThanBall=1; } else { wallLessThanBall=-1; } }
         if (wall.Y!=null){ if (wall.Y<ball.Y) { wallLessThanBall=1; } else { wallLessThanBall=-1; } }
