@@ -3,7 +3,7 @@ package GravityBilliards;
 class Time {
 
     // TODO: Move method here
-    public static Double ToCollision(Ball ball1, Ball ball2){
+    public static double ToCollision(Ball ball1, Ball ball2){
         return Collider.GetTimeUntilCollision(ball1, ball2);
     }
 
@@ -17,7 +17,6 @@ class Time {
         }
         double va = ball.VelocityX/wall.accelerationX;
         double time = va-Math.sqrt(va*va-(2*(wall.X-ball.X)+wallLessThanBall*Ball.Diameter)/wall.accelerationX);
-        if (time<0) return null;
         return time;
     }
 
