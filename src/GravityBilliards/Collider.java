@@ -63,8 +63,8 @@ public class Collider
         return collistions;
     }
 
-    // TODO: Move to TimeCalculator
-    private static Double GetTimeUntilCollision(Ball b1 , Ball b2)
+    // TODO: Move to Time
+    public static Double GetTimeUntilCollision(Ball b1 , Ball b2)
     {
         var dx = b1.X - b2.X;
         var dy = b1.Y - b2.Y;
