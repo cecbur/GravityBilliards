@@ -63,6 +63,7 @@ public class Collider
         return collistions;
     }
 
+    // TODO: Move to TimeCalculator
     private static Double GetTimeUntilCollision(Ball b1 , Ball b2)
     {
         var dx = b1.X - b2.X;
@@ -85,6 +86,7 @@ public class Collider
         return -p/2 - D;
     }
 
+    // Updates the velosities of the two balls to velosities after collision
     static void BallCollision(Ball ball1 , Ball ball2)
     {
         // Verify that distance between balls is one ball diameter

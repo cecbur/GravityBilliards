@@ -20,4 +20,19 @@ public class Ball {
     public double Y;
     public double VelocityX;
     public double VelocityY;
+
+    public double xByTime(double time) {
+        return X+time*VelocityX;
+    }
+
+    public double yByTime(double time) {
+        return Y+time*VelocityY;
+    }
+
+    public void setTime0(double time) {
+        X +=  time*VelocityX;
+        Y +=  time*VelocityY;
+    }
+
+
 }
