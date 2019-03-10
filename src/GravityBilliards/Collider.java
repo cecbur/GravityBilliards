@@ -48,14 +48,14 @@ public class Collider
     private static List<Collision> GetAllCollision(List<Ball> balls)
     {
         var collistions = new ArrayList<Collision>();
-        for (var b1 : balls)
+        for (Ball b1 : balls)
         {
-            for (var b2 : balls) {
+            for (Ball b2 : balls) {
                 if (b1 == b2) {
                     continue;
                 }
 
-                var t = GetTimeUntilCollision(b1, b2);
+                var t = Time.ToCollision(b1, b2);
                 if (t>0)
                 {
                     collistions.add(new Collision(t, b1, b2));
@@ -65,7 +65,7 @@ public class Collider
         return collistions;
     }
 
-    // TODO: Move to Time
+    // TODO: Remove: Moved to Time
     public static double GetTimeUntilCollision(Ball b1 , Ball b2)
     {
         var dx = b1.X - b2.X;
@@ -92,12 +92,12 @@ public class Collider
     // Updates the velocities of the two balls to velocities after collision
     static void Collide(Ball ball1 , Ball ball2)
     {
-        /* TODO: kEEP
         // Verify that distance between balls is one ball diameter
-        // if (!Measurer.sameDistance(ball1, ball2, Ball.Diameter)) {   // TODO: Keep
-        if (Math.round(Measurer.distance2D(ball1.X, ball1.Y, ball2.X, ball2.Y)*10000)/10000!=Math.round(Ball.Diameter*10000)/10000) {
+        // if (Math.round(Measurer.distance2D(ball1.X, ball1.Y, ball2.X, ball2.Y)*10000)/10000!=Math.round(Ball.Diameter*10000)/10000) {    // TODO: Remove
+        if (!Measurer.sameDistance(ball1, ball2, Ball.Diameter)) {   // TODO: Keep
                 throw new IllegalArgumentException("Balls don't touch!");
         }
+        /* TODO: kEEP
         */
 
         // change frame of reference so that ball 1 is standing still
@@ -134,7 +134,7 @@ public class Collider
     {
         // Verify that distance between ball and wall is one half ball diameter
         if (!Measurer.sameDistance(ball, wall, Ball.Diameter/2)) {
-            throw new IllegalArgumentException("Ball don't touch wall!");
+            throw new IllegalArgumentException("Ball doesn't touch wall!");
         }
 
         if (wall.X!=null) ball.VelocityX=-ball.VelocityX;

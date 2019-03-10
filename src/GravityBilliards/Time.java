@@ -2,9 +2,18 @@ package GravityBilliards;
 
 class Time {
 
-    // TODO: Move method here
+    // public static double ToCollision(Ball ball1, Ball ball2){ return Collider.GetTimeUntilCollision(ball1, ball2); }     // TODO: Remove
     public static double ToCollision(Ball ball1, Ball ball2){
-        return Collider.GetTimeUntilCollision(ball1, ball2);
+        double dX0=ball2.X-ball1.X;
+        double dY0=ball2.Y-ball1.Y;
+        double dVx=ball2.VelocityX-ball1.VelocityX;
+        double dVy=ball2.VelocityY-ball1.VelocityY;
+        double p=2*(dX0*dVx+dY0*dVy)/(dVx*dVx+dVy*dVy);
+        double q =(dX0*dX0+dY0*dY0-Ball.Diameter*Ball.Diameter)/(dVx*dVx+dVy*dVy);
+        double inSqrt = p*p/4-q;
+        if (inSqrt<0) return -1;        // Balls will not collide
+        double time = -p/2-Math.sqrt(inSqrt);
+        return time;
     }
 
     public static Double ToCollision(Ball ball, Wall wall) {
@@ -17,10 +26,10 @@ class Time {
         }
         if (wall.accelerationX==0){     // Wall is standing still
             if (wallLessThanBall*ball.VelocityX>=0) return -1d;    // Ball moving away from mall
-            return Math.abs(wall.X+wallLessThanBall*Ball.Diameter/2-ball.X)/ball.VelocityX;
+            return (wall.X+wallLessThanBall*Ball.Diameter/2-ball.X)/ball.VelocityX;
         }
         double va = ball.VelocityX/wall.accelerationX;
-        double time = va-Math.sqrt(va*va-(2*(wall.X-ball.X)+wallLessThanBall*Ball.Diameter)/wall.accelerationX);
+        double time = va-Math.sqrt(va*va-(2*(wall.X-ball.X)+wallLessThanBall*Ball.Diameter*Ball.Diameter)/wall.accelerationX);
         return time;
     }
 
