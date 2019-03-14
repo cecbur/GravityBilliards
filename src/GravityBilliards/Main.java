@@ -11,14 +11,14 @@ public class Main {
     public static void main(String[] args) throws IOException {
         List<Ball> balls = new ArrayList<Ball>();
         balls.add(new Ball(0,0,0,0, Color.black));
-        balls.add(new Ball(0.5,0.51,1,1, Color.red));
-        balls.add(new Ball(1,1,0,0, Color.blue));
+        balls.add(new Ball(Table.Width-0.5,1.49,-1,-1, Color.red));
+        balls.add(new Ball(Table.Width-1,1,0,0, Color.blue));
 
 
         State state = new State(balls);
         Drawer.Draw(state);
         double timeToCollision;
-        while (Drawer.animationFrame<16) {
+        while (Drawer.animationFrame<Settings.Frames) {
 
             var nextCollision=Collider.GetFirst(state.Balls);
             timeToCollision = nextCollision.T;

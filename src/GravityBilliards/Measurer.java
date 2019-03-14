@@ -30,7 +30,7 @@ public class Measurer {
         double precision =10000;
         double d1=Math.round(distance1*precision)/precision;
         double d2=Math.round(distance2*precision)/precision;
-        if (d1==d2) return true;
+        if (Math.abs(d1-d2)<2/precision) return true;
         else return false;
     }
 

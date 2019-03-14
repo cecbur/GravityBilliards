@@ -1,5 +1,4 @@
 package GravityBilliards;
-
 public class Wall {
 
 
@@ -10,8 +9,8 @@ public class Wall {
         this.Y2 =y2;
         if (x1==x2){ X=x1; }
         if (y1==y2){ Y=y1; }
-        if (accelerates){
-            accelerationX = 9.10938356 * Math.pow(10, 31) / Math.pow(105700*9.461*Math.pow(10, 15), 2);   // m/r2
+        if (!accelerates){
+            accelerationX = 0;
         }
     }
 
@@ -21,7 +20,7 @@ public class Wall {
     public double Y2;
     public Double X=null;
     public Double Y=null;
-    public double accelerationX = 0;
+    public double accelerationX = Settings.Acceleration;
 
     private double deltaXByTime(double time) {
         return Math.pow(time, 2) * accelerationX / 2;
