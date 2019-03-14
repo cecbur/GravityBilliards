@@ -55,7 +55,7 @@ public class Collider
                     continue;
                 }
                 var t = Time.ToCollision(b1, b2);
-                if (t>0 && (returnObj.B1==null || returnObj.T>t))
+                if (t>=0 && (returnObj.B1==null || returnObj.T>t))
                 {
                     returnObj.T=t;
                     returnObj.B1=b1;
@@ -65,7 +65,7 @@ public class Collider
             }
             for (Wall w : Table.walls.values()) {
                 var t = Time.ToCollision(b1, w);
-                if (t>0 && (returnObj.B1==null || returnObj.T>t))
+                if (t>=0 && (returnObj.B1==null || returnObj.T>t))
                 {
                     returnObj.T=t;
                     returnObj.B1=b1;
@@ -117,15 +117,16 @@ public class Collider
         Ball b2pre = new Ball(ball2.X, ball2.Y, 0, 0, Color.black);
 
         // Calculate angle of appoach for ball 1
-        double approachAngle = Math.atan(b1pre.VelocityX/b1pre.VelocityY);
+        double approachAngle = Math.atan(b1pre.VelocityY/b1pre.VelocityX);
         // Calculate angle between balls
         double ballAngle = Math.atan((b2pre.Y-b1pre.Y)/(b2pre.X-b1pre.X));
 
         // Calculate speed after collision
         double b1SpeedPre=Math.sqrt(b1pre.VelocityX*b1pre.VelocityX+b1pre.VelocityY*b1pre.VelocityY);
+        if(b1pre.X>b2pre.X) { b1SpeedPre = -b1SpeedPre; }
         double b2SpeedPost=b1SpeedPre*Math.cos(ballAngle-approachAngle);
         double b1SpeedPost=b1SpeedPre*Math.sin(ballAngle-approachAngle);
-        Ball b1post = new Ball(b1pre.X, b1pre.Y, b1SpeedPost*Math.sin(ballAngle), -b1SpeedPost*Math.cos(ballAngle), Color.black);
+        Ball b1post = new Ball(b1pre.X, b1pre.Y, b1SpeedPost*Math.sin(ballAngle), b1SpeedPost*Math.cos(ballAngle), Color.black);
         Ball b2post = new Ball(b2pre.X, b2pre.Y, b2SpeedPost*Math.cos(ballAngle), b2SpeedPost*Math.sin(ballAngle), Color.black);
 
         // Calculate delta V
@@ -146,7 +147,7 @@ public class Collider
     {
         // Verify that distance between ball and wall is one half ball diameter
         if (!Measurer.sameDistance(ball, wall, Ball.Diameter/2)) {
-            throw new IllegalArgumentException("Ball doesn't touch wall!");
+            throw new IllegalArgumentException("Ball doesn't touch wall! Ball is at Y='"+ball.Y+"' and wall is at Y='"+wall.Y+"' so distance between them is '"+Measurer.distance2D(ball, wall)+"' but should have been'"+Ball.Diameter/2+"'.");
         }
 
         if (wall.X!=null) ball.VelocityX=-ball.VelocityX;
