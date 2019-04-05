@@ -19,3 +19,4 @@ project/plugins/project/
 
 # Custom
 *.hlt
+imgOut/

@@ -5,7 +5,7 @@ import java.awt.*;
 public class Ball {
 
     public static final double Mass = 0.165;
-    public static final double Diameter = 0.0615;
+    public static final double Diameter = 0.0615*2;     // TODO: Remove the 2
     public static int ballsCreated  = 0;
     public int Id;
 

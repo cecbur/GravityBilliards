@@ -49,6 +49,7 @@ public class Drawer
         // TYPE_INT_ARGB specifies the image format: 8-bit RGBA packed
         // into integer pixels
 
+        double energy = Util.getTotalKineticEnergy(balls);
         Double t = 0d;
         do {
             animationFrame++;
@@ -58,6 +59,8 @@ public class Drawer
             for (Ball ball :balls) {
                 DrawBall(ig2, ball, t);
             }
+            // ig2.drawString("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",100,100);
+            ig2.drawString(String.valueOf(energy),100,100);
             ig2.drawString(t.toString(),0,0);
             ImageIO.write(bi, "PNG", new File(String.format(file, animationFrame.toString())));
             t+=1d/framesPerSecond;
