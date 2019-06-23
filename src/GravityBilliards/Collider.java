@@ -60,7 +60,7 @@ public class Collider
                     continue;
                 }
                 var t = Time.ToCollision(b1, b2);
-                if (t>=0 && (returnObj.B1==null || returnObj.T>t))
+                if (t>=-0.00009 && (returnObj.B1==null || returnObj.T>t))
                 {
                     returnObj.T=t;
                     returnObj.B1=b1;

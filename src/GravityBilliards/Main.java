@@ -10,10 +10,12 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         List<Ball> balls = new ArrayList<Ball>();
-        balls.add(new Ball(1,2,0,1, Color.black));
+        balls.add(new Ball(1,2,0,-1, Color.black));
         balls.add(new Ball(1-Ball.Diameter/2,1,0,0, Color.red));
         balls.add(new Ball(1+Ball.Diameter/2,1,0,0, Color.blue));
-        balls.add(new Ball(0,2,0.1,0.1, Color.green));
+        balls.add(new Ball(1,1-Math.sqrt(0.75)*Ball.Diameter,0,0, Color.green));
+        balls.add(new Ball(1-Ball.Diameter,1-Math.sqrt(0.75)*Ball.Diameter,0,0, Color.MAGENTA));
+        balls.add(new Ball(1+Ball.Diameter,1-Math.sqrt(0.75)*Ball.Diameter,0,0, Color.ORANGE));
 
 
         State state = new State(balls);
