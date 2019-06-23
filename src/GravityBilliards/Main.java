@@ -10,10 +10,10 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         List<Ball> balls = new ArrayList<Ball>();
-        balls.add(new Ball(0,0,0,0, Color.black));
-        balls.add(new Ball(0.5,0.48,1,1, Color.red));
-        balls.add(new Ball(1,1,0,0, Color.blue));
-        balls.add(new Ball(1,2,0.1,0.1, Color.green));
+        balls.add(new Ball(1,2,0,1, Color.black));
+        balls.add(new Ball(1-Ball.Diameter/2,1,0,0, Color.red));
+        balls.add(new Ball(1+Ball.Diameter/2,1,0,0, Color.blue));
+        balls.add(new Ball(0,2,0.1,0.1, Color.green));
 
 
         State state = new State(balls);
@@ -25,7 +25,7 @@ public class Main {
             timeToCollision = nextCollision.T;
             Drawer.Animate(balls, timeToCollision);
             state.forwardTime(timeToCollision);
-            if (nextCollision.B2!=null) Collider.Collide2(nextCollision.B1, nextCollision.B2);
+            if (nextCollision.B2!=null) Collider.Collide3(nextCollision.B1, nextCollision.B2);
             else Collider.Collide(nextCollision.B1, nextCollision.W);
         }
         /* TODO: Remove

@@ -1,5 +1,7 @@
 package GravityBilliards;
 
+import GravityBilliards.Transformer.*;
+
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -139,19 +141,59 @@ public class Collider
         transform.ApplyReverse(ball2);
     }
 
-    private static Transform GetTransformToChangeReferencePointToBall(Ball ball)
+
+    static void Collide3(Ball a, Ball b)
     {
-        return new Transform(-ball.X, -ball.Y, -ball.VelocityX, -ball.VelocityY);
+        // Transform 1, make B stand still
+        Transform trans1 = new VelocityTransform(-b.VelocityX, -b.VelocityY);
+        Ball a1 = trans1.Apply(a);
+        Ball b1 = trans1.Apply(b);
+
+        // Transform 2, make A be in origo
+        Transform trans2 = new PositionTransform(-a.X, -a.Y);
+        Ball a2 = trans2.Apply(a1);
+        Ball b2 = trans2.Apply(b1);
+
+        // Transform 3, make both balls be along x-axis
+        double theta = -Math.atan2(b2.Y, b2.X);
+        Transform trans3 = new RotationTransform(theta);
+        Ball a3 = trans3.Apply(a2);
+        Ball b3 = trans3.Apply(b2);
+
+        // Collision
+        b3.VelocityX = a3.VelocityX;
+        a3.VelocityX = 0;
+
+        // Transform back
+        Ball a4 = trans3.Unapply(a3);
+        Ball b4 = trans3.Unapply(b3);
+        Ball a5 = trans2.Unapply(a4);
+        Ball b5 = trans2.Unapply(b4);
+        Ball a6 = trans1.Unapply(a5);
+        Ball b6 = trans1.Unapply(b5);
+
+        a.VelocityX=a6.VelocityX;
+        a.VelocityY=a6.VelocityY;
+        b.VelocityX=b6.VelocityX;
+        b.VelocityY=b6.VelocityY;
+
+
     }
 
-    private static class Transform
+
+    private static TransformOld GetTransformToChangeReferencePointToBall(Ball ball)
+    {
+        return new TransformOld(-ball.X, -ball.Y, -ball.VelocityX, -ball.VelocityY);
+    }
+
+    private static class TransformOld
     {
         double DeltaX;
         double DeltaY;
         double DeltaVx;
         double DeltaVy;
 
-        Transform(double deltaX, double deltaY, double deltaVx, double deltaVy)
+        TransformOld(double deltaX, double deltaY, double deltaVx, double deltaVy)
         {
             DeltaX = deltaX;
             DeltaY = deltaY;

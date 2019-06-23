@@ -11,12 +11,21 @@ public class Ball {
 
     public Ball(double x, double y, double velocityX, double velocityY, Color color) {
         ballsCreated++;
-        Id = ballsCreated;
-        this.X=x;
-        this.Y=y;
-        this.VelocityX=velocityX;
-        this.VelocityY=velocityY;
-        this.Color=color;
+        int id = ballsCreated;
+        BallFactory(this, x, y, velocityX, velocityY, color, id);
+    }
+
+    public Ball(double x, double y, double velocityX, double velocityY, Color color, int id) {
+        BallFactory(this, x, y, velocityX, velocityY, color, id);
+    }
+
+    private static void BallFactory(Ball ball, double x, double y, double velocityX, double velocityY, Color color, int id) {
+        ball.X = x;
+        ball.Y =y;
+        ball.VelocityX = velocityX;
+        ball.VelocityY = velocityY;
+        ball.Color = color;
+        ball.Id = id;
     }
 
     public double X;
